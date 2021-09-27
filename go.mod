@@ -3,8 +3,10 @@ module biu
 go 1.15
 
 require (
+	github.com/DataDog/go-python3 v0.0.0-20210805105248-03d93fb21b67
 	github.com/abiosoft/ishell v2.0.0+incompatible
 	github.com/abiosoft/readline v0.0.0-20180607040430-155bce2042db
+	github.com/asdine/storm v2.1.2+incompatible
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/color v1.12.0 // indirect
@@ -19,11 +21,14 @@ require (
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/mitchellh/mapstructure v1.4.2
+	github.com/nxadm/tail v1.4.8
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rs/zerolog v1.23.0
+	github.com/sbinet/go-python v0.1.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/urfave/cli v1.22.5
 	github.com/x-cray/logrus-prefixed-formatter v0.5.2
+	go.etcd.io/bbolt v1.3.6 // indirect
 	golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e
 	gopkg.in/VividCortex/ewma.v1 v1.1.1 // indirect
 	gopkg.in/cheggaaa/pb.v2 v2.0.7

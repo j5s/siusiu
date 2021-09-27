@@ -21,3 +21,11 @@ go run main.go 或 直接运行编译好的可执行文件
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/806838be04a24ca4b8e89203384f4842.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
 
+
+phpmywind 指纹识别思路：
+
+fofa 搜索4g.php
+
+识别： /install/
+http://gdzqhy.com/install/
+如果包含关键字 phpmywind 就是

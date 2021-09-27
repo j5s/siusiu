@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"os"
 	"os/exec"
 	"runtime"
 	"strings"
@@ -17,10 +18,11 @@ func NotFoundHandler(c *ishell.Context) {
 	} else {
 		cmd = exec.Command("/bin/bash", "-c", input)
 	}
-	result, err := cmd.CombinedOutput()
-	if err != nil {
-		c.Println(err)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		c.Println("cmd.Run failed,err:", err)
 		return
 	}
-	c.Printf(string(result))
 }

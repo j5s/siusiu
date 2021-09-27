@@ -2,6 +2,7 @@ package routers
 
 import (
 	"biu/controllers"
+	"biu/py"
 
 	"github.com/abiosoft/ishell"
 )
@@ -59,19 +60,130 @@ func Init(shell *ishell.Shell) {
 		Func: controllers.InfluxAttackController,
 	})
 	shell.AddCmd(influxCmd)
+	//baidu url 采集
+	baiduCmd := &ishell.Cmd{
+		Name: "baidu",
+		Help: "baidu url采集",
+		Func: controllers.BaiduController,
+	}
+	shell.AddCmd(baiduCmd)
+	//bing url 采集
+	bingCmd := &ishell.Cmd{
+		Name: "bing",
+		Help: "bing url采集",
+		Func: nil,
+	}
+	bingCmd.AddCmd(&ishell.Cmd{
+		Name: "search",
+		Help: "搜索关键字",
+		Func: controllers.BingSearchController,
+	})
+	bingCmd.AddCmd(&ishell.Cmd{
+		Name: "file",
+		Help: "从文件中读取搜索关键字",
+		Func: controllers.BingFileController,
+	})
+	// bingCmd.AddCmd(&ishell.Cmd{
+	// 	Name: "sql-inject",
+	// 	Help: "采集可能存在sql注入的url",
+	// 	Func: controllers.BingSqlInjectController,
+	// })
+	shell.AddCmd(bingCmd)
+	//google
+	googleCmd := &ishell.Cmd{
+		Name: "google",
+		Help: "google url采集",
+		Func: nil,
+	}
+	googleCmd.AddCmd(&ishell.Cmd{
+		Name: "search",
+		Help: "搜索关键字",
+		Func: controllers.GoogleSearchController,
+	})
+	shell.AddCmd(googleCmd)
+	//db
+	dbCmd := &ishell.Cmd{
+		Name: "db",
+		Help: "操作数据库",
+		Func: nil,
+	}
+	dbCmd.AddCmd(&ishell.Cmd{
+		Name: "all",
+		Help: "所有数据",
+		Func: controllers.DbAllController,
+	})
+	dbCmd.AddCmd(&ishell.Cmd{
+		Name: "urls",
+		Help: "根据关键字获取采集到url",
+		Func: controllers.DbURLsController,
+	})
+	shell.AddCmd(dbCmd)
+	//whois
+	whoisCmd := &ishell.Cmd{
+		Name: "whois",
+		Help: "whois查询",
+		Func: controllers.WhoisController,
+	}
+	shell.AddCmd(whoisCmd)
+	//目录相关的操作
+	dirCmd := &ishell.Cmd{
+		Name: "dir",
+		Help: "目录相关的操作",
+		Func: nil,
+	}
+	dirCmd.AddCmd(&ishell.Cmd{
+		Name: "collect",
+		Help: "采集某个项目的所有目录名",
+		Func: controllers.DirCollectController,
+	})
+	shell.AddCmd(dirCmd)
+	//py 脚本
+	pyCmd := &ishell.Cmd{
+		Name: "py",
+		Help: "执行python脚本",
+		Func: nil,
+	}
+	pyCmd.AddCmd(&ishell.Cmd{
+		Name: "collect-proxy",
+		Help: "代理采集",
+		Func: func(c *ishell.Context) {
+			py.Exec("collect-proxy.py", c.Args)
+		},
+	})
+	pyCmd.AddCmd(&ishell.Cmd{
+		Name: "backup-dict",
+		Help: "生成网站备份字典",
+		Func: func(c *ishell.Context) {
+			py.Exec("backup-dict.py", c.Args)
+		},
+	})
+	pyCmd.AddCmd(&ishell.Cmd{
+		Name: "passwd-based-domain",
+		Help: "基于域名生成若口令字典,常用于爆破网站后台密码",
+		Func: func(c *ishell.Context) {
+			py.Exec("passwd-based-domain.py", c.Args)
+		},
+	})
+	pyCmd.AddCmd(&ishell.Cmd{
+		Name: "passwd-based-userinfo",
+		Help: "基于用户资料生成弱口令字典",
+		Func: func(c *ishell.Context) {
+			py.Exec("passwd-based-userinfo.py", c.Args)
+		},
+	})
+	pyCmd.AddCmd(&ishell.Cmd{
+		Name: "cms-fingerprint",
+		Help: "cms指纹识别",
+		Func: func(c *ishell.Context) {
+			py.Exec("cms-fingerprint/main.py", c.Args)
+		},
+	})
+	pyCmd.AddCmd(&ishell.Cmd{
+		Name: "c-segment-scan",
+		Help: "c段弱点发现",
+		Func: func(c *ishell.Context) {
+			py.BashExec("c-segment-scan/run.sh", c.Args)
+		},
+	})
+	shell.AddCmd(pyCmd)
 }
-
-// var PasswdGuess = cli.Command{
-// 	Name:        "guess",
-// 	Usage:       "-i 主机文件名 -u 用户名字典 -p 密码字典 -r 协程数 -t 超时时间 -d debug 模式",
-// 	Description: "弱口令爆破器,支持:ssh,ftp,mysql,redis,mssql,postgresql,mongodb",
-// 	Action:      controllers.GuessController,
-// 	Flags: []cli.Flag{
-// 		cli.BoolFlag{Name: "debug, d", Usage: "debug模式"},
-// 		cli.IntFlag{Name: "timeout, t", Value: 5, Usage: "连接的超时时间"},
-// 		cli.IntFlag{Name: "routine_count, r", Value: 5000, Usage: "协程数量"},
-// 		cli.StringFlag{Name: "ip_list, i", Value: "./dict/ip_list.txt", Usage: "主机列表文件的路径"},
-// 		cli.StringFlag{Name: "user_dict, u", Value: "./dict/user.dic", Usage: "用户名字典文件的路径"},
-// 		cli.StringFlag{Name: "pass_dict, p", Value: "./dict/pass.dic", Usage: "密码字典文件的路径"},
-// 	},
-// }
