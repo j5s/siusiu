@@ -8,7 +8,7 @@ function setup {
     cd $1/$app_name
     go build -o $app_name
     mv $app_name $2/
-    echo "alias $app_name=$2/$app_name" >>$HOME/.zshrc
+    echo "alias $app_name=$2/$app_name" >> $HOME/.zshrc
     source $HOME/.zshrc
     echo "[*] setup success!"
 }
