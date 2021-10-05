@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"biu/pkg/shodan"
-	"biu/util"
+	"siusiu/pkg/shodan"
+	"siusiu/util"
 	"fmt"
 	"os"
 

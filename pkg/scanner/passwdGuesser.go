@@ -1,10 +1,10 @@
 package scanner
 
 import (
-	"biu/logger"
-	"biu/models"
 	"fmt"
 	"runtime"
+	"siusiu/logger"
+	"siusiu/models"
 	"sync"
 
 	"gopkg.in/cheggaaa/pb.v2"

@@ -1,6 +1,6 @@
 package plugin
 
-import "biu/models"
+import "siusiu/models"
 
 //HandlerFuncMap 服务和处理函数之间的映射关系
 var HandlerFuncMap map[string]models.ServiceHandlerFunc

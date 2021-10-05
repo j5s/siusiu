@@ -1,8 +1,8 @@
 package validate
 
 import (
-	"biu/models"
-	"biu/util"
+	"siusiu/models"
+	"siusiu/util"
 
 	"github.com/abiosoft/ishell"
 )

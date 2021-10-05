@@ -1,7 +1,7 @@
 package plugin
 
 import (
-	"biu/models"
+	"siusiu/models"
 	"testing"
 )
 

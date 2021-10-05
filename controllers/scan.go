@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"biu/pkg/scanner"
-	"biu/validate"
+	"siusiu/pkg/scanner"
+	"siusiu/validate"
 
 	"github.com/abiosoft/ishell"
 	"github.com/sirupsen/logrus"

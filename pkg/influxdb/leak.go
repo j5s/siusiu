@@ -1,13 +1,13 @@
 package influxdb
 
 import (
-	"biu/models"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"siusiu/models"
 	"strings"
 
 	"github.com/mitchellh/mapstructure"

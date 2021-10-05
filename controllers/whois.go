@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"biu/models"
-	"biu/validate"
+	"siusiu/models"
+	"siusiu/validate"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"

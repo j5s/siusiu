@@ -1,0 +1,11 @@
+#!/bin/echo
+
+
+function download {
+    wget -P $1 https://github.com.cnpmjs.org/knownsec/pocsuite3/archive/master.zip
+    cd $1
+    unzip master.zip
+    rm -f master.zip
+    cd pocsuite3-master
+    pip3 install -r requirements.txt
+}

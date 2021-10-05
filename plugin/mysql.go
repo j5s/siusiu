@@ -1,8 +1,8 @@
 package plugin
 
 import (
-	"biu/models"
 	"fmt"
+	"siusiu/models"
 
 	_ "github.com/go-sql-driver/mysql" //匿名导入 默认会自动执行该包中的init()方法
 	"github.com/jinzhu/gorm"

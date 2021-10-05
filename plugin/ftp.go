@@ -1,9 +1,9 @@
 package plugin
 
 import (
-	"biu/logger"
-	"biu/models"
 	"fmt"
+	"siusiu/logger"
+	"siusiu/models"
 	"time"
 
 	"github.com/jlaffaye/ftp"

@@ -3,6 +3,7 @@ package validate
 import (
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"strconv"
 
@@ -73,4 +74,13 @@ func ReadFilePath(c *ishell.Context) (*tail.Tail, error) {
 		return nil, err
 	}
 	return tails, nil
+}
+
+func ReadFilePath2(c *ishell.Context) (r io.Reader, err error) {
+	c.Print("请输入文件路径:")
+	filepath := c.ReadLine()
+	if len(filepath) == 0 {
+		return nil, errors.New("filepath 不能为空")
+	}
+	return os.Open(filepath)
 }

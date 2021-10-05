@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"biu/dao/dict"
-	"biu/models"
-	"biu/pkg/influxdb"
+	"siusiu/dao/dict"
+	"siusiu/models"
+	"siusiu/pkg/influxdb"
 	"fmt"
 	"strconv"
 

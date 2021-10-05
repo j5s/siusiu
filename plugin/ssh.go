@@ -1,12 +1,12 @@
 package plugin
 
 import (
-	"biu/logger"
 	"fmt"
 	"net"
+	"siusiu/logger"
 	"time"
 
-	"biu/models"
+	"siusiu/models"
 
 	"golang.org/x/crypto/ssh"
 )

@@ -1,11 +1,11 @@
 package influxdb
 
 import (
-	"biu/pkg/jwt"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"siusiu/pkg/jwt"
 	"strings"
 
 	"github.com/sirupsen/logrus"
