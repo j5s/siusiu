@@ -2,6 +2,7 @@ package main
 
 import (
 	"siusiu/routers"
+	"siusiu/settings"
 
 	"github.com/abiosoft/ishell"
 	"github.com/abiosoft/readline"
@@ -9,7 +10,7 @@ import (
 
 func main() {
 	shell := ishell.NewWithConfig(&readline.Config{
-		Prompt: "siusiu > ",
+		Prompt: settings.AppConfig.ShellPrompt,
 	})
 	routers.Init(shell)
 	shell.Run()
