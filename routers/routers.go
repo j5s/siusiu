@@ -3,66 +3,25 @@ package routers
 import (
 	"siusiu/controllers"
 	"siusiu/pkg/exec"
+	"siusiu/settings"
 
 	"github.com/abiosoft/ishell"
 )
 
 //Init 初始化路由
 func Init(shell *ishell.Shell) {
+	//第三方工具
+	for _, tool := range settings.AppConfig.Tools {
+		shell.AddCmd(&ishell.Cmd{
+			Name: tool["Name"],
+			Help: tool["Help"],
+			Func: func(c *ishell.Context) {
+				exec.Bash(tool["Run"], c.Args)
+			},
+		})
+	}
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
-	//sqlmap
-	shell.AddCmd(&ishell.Cmd{
-		Name: "sqlmap",
-		Help: "自动化sql注入工具",
-		Func: func(c *ishell.Context) {
-			exec.Bash("sqlmap/run.sh", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "pocsuite3-cli",
-		Help: "poc框架(命令行模式)",
-		Func: func(c *ishell.Context) {
-			exec.Bash("pocsuite3/run-cli.sh", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "pocsuite3-console",
-		Help: "poc框架(控制台模式)",
-		Func: func(c *ishell.Context) {
-			exec.Bash("pocsuite3/run-console.sh", c.Args)
-		},
-	})
-	// 目录扫描
-	shell.AddCmd(&ishell.Cmd{
-		Name: "dirsearch",
-		Help: "目录扫描器",
-		Func: func(c *ishell.Context) {
-			exec.Bash("dirsearch/run.sh", c.Args)
-		},
-	})
-	// url 采集
-	shell.AddCmd(&ishell.Cmd{
-		Name: "url-collector",
-		Help: "搜索引擎URL采集器",
-		Func: func(c *ishell.Context) {
-			exec.Bash("url-collector/run.sh", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "zenmap",
-		Help: "nmap-gui 版本,一个端口扫描器",
-		Func: func(c *ishell.Context) {
-			exec.Bash("nmap/gui/run.sh", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "nmap",
-		Help: "端口扫描器",
-		Func: func(c *ishell.Context) {
-			exec.Bash("nmap/cli/run.sh", c.Args)
-		},
-	})
 	//scan 端口扫描
 	shell.AddCmd(&ishell.Cmd{
 		Name: "port-scan",
