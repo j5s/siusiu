@@ -1,8 +1,8 @@
 #!/bin/bash
 base_path=$HOME/src
 install_path=$base_path/pocsuite3 #程序安装目录
-
-. $base_path/biu/myvendor/pocsuite3/lib/download.lib
+app_name=siusiu
+. $base_path/$app_name/myvendor/pocsuite3/lib/download.lib
 
 #1.检查程序目录是否存在
 if [ ! -d $install_path ]; then

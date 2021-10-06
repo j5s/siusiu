@@ -45,12 +45,17 @@ Commands:
 wget https://gitee.com/nothing-is-nothing/siusiu/raw/master/setup.sh
 chmod +x setup.sh
 ./setup.sh
+siusiu
 ```
 
 ## Screenshots
 
+如果用户未安装pocsuite3，则自动下载 pocsuite3,然后自动运行 
+![avatar](https://img-blog.csdnimg.cn/20211006160456729.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+在siusiu控制台中运行sqlmap和dirsearch
+![avatar](https://img-blog.csdnimg.cn/20211006160557298.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 
-
-
-
+## Test
+- MacOS
