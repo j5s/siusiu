@@ -10,9 +10,11 @@ function setup {
     go build -o $app_name
     mv $app_name $2/
     for shell_config_file in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc"; do
-        sed -i "/$app_name/d" $shell_config_file                 #删除含有app_name的所有行
-        echo "alias $app_name=$2/$app_name" >>$shell_config_file #向shell配置文件中添加别名
-        source $shell_config_file
+        if [ -f $shell_config_file ]; then
+            sed -i "/$app_name/d" $shell_config_file                 #删除含有app_name的所有行
+            echo "alias $app_name=$2/$app_name" >>$shell_config_file #向shell配置文件中添加别名
+            source $shell_config_file
+        fi
     done
     echo "[*] setup success!"
 }
