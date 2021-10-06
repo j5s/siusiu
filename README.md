@@ -39,7 +39,7 @@ Commands:
   zenmap                     nmap-gui 版本,一个端口扫描器
 ```
 
-## Download:
+## Installation:
 
 ```
 wget https://gitee.com/nothing-is-nothing/siusiu/raw/master/setup.sh
@@ -57,5 +57,7 @@ siusiu
 ![avatar](https://img-blog.csdnimg.cn/20211006160557298.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 
-## Test
+## Tested On
 - MacOS
+- CentOS7
+- Ubuntu
