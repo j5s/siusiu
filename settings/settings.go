@@ -55,6 +55,16 @@ func newAppConfig() *Config {
 			"Help": ".git泄漏利用脚本",
 			"Run":  "GitHack/run.sh",
 		},
+		{
+			"Name": "ds_store_exp",
+			"Help": "macOS .DS_Store文件泄漏利用脚本",
+			"Run":  "ds_store_exp/run.sh",
+		},
+		{
+			"Name": "dvcs-ripper",
+			"Help": "SVN 泄漏利用脚本",
+			"Run":  "dvcs-ripper/run.sh",
+		},
 	}
 
 	return &Config{
