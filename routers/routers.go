@@ -1,6 +1,11 @@
 package routers
 
 import (
+	"io"
+	"io/ioutil"
+	"log"
+	"os"
+	"path"
 	"siusiu/controllers"
 	"siusiu/pkg/exec"
 	"siusiu/settings"
@@ -9,17 +14,50 @@ import (
 )
 
 //Init 初始化路由
-func Init(shell *ishell.Shell) {
+func Init(shell *ishell.Shell) error {
 	//第三方工具
 	for _, tool := range settings.AppConfig.Tools {
 		shell.AddCmd(&ishell.Cmd{
 			Name: tool["Name"],
 			Help: tool["Help"],
+			Func: func(run string) func(c *ishell.Context) {
+				return func(c *ishell.Context) {
+					exec.Bash(run, c.Args)
+				}
+			}(tool["Run"]),
+		})
+	}
+	demosCmd := &ishell.Cmd{
+		Name: "demos",
+		Help: "获取工具的使用样例",
+		Func: nil,
+	}
+	demoesPath := path.Join(settings.AppConfig.MyVendorPath, "demos")
+	markdowns, err := ioutil.ReadDir(demoesPath)
+	if err != nil {
+		log.Println("ioutil.ReadDir failed,err:", err)
+		return err
+	}
+	for i := range markdowns {
+		demosCmd.AddCmd(&ishell.Cmd{
+			Name: markdowns[i].Name(),
+			Help: markdowns[i].Name(),
 			Func: func(c *ishell.Context) {
-				exec.Bash(tool["Run"], c.Args)
+				filepath := path.Join(demoesPath, markdowns[i].Name())
+				reader, err := os.Open(filepath)
+				if err != nil {
+					log.Println("os.Open failed,err:", err)
+					return
+				}
+				if _, err := io.Copy(os.Stdout, reader); err != nil {
+					log.Println("io.Copy failed,err:", err)
+					return
+				}
+				return
 			},
 		})
 	}
+	shell.AddCmd(demosCmd)
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
 	//scan 端口扫描
@@ -130,4 +168,5 @@ func Init(shell *ishell.Shell) {
 			exec.Python3("c-segment-scan/run.sh", c.Args)
 		},
 	})
+	return nil
 }

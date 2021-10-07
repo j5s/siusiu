@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"siusiu/routers"
 	"siusiu/settings"
 
@@ -12,6 +13,9 @@ func main() {
 	shell := ishell.NewWithConfig(&readline.Config{
 		Prompt: settings.AppConfig.ShellPrompt,
 	})
-	routers.Init(shell)
+	if err := routers.Init(shell); err != nil {
+		log.Println("routers.Init failed,err:", err)
+		return
+	}
 	shell.Run()
 }
