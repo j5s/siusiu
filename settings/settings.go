@@ -65,6 +65,11 @@ func newAppConfig() *Config {
 			"Help": "SVN 泄漏利用脚本",
 			"Run":  "dvcs-ripper/run.sh",
 		},
+		{
+			"Name": "vim-swp-exp",
+			"Help": "vim swp 文件泄漏利用工具",
+			"Run":  "vim-swp-exp/run.sh",
+		},
 	}
 
 	return &Config{
