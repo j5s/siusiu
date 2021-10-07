@@ -42,19 +42,21 @@ func Init(shell *ishell.Shell) error {
 		demosCmd.AddCmd(&ishell.Cmd{
 			Name: markdowns[i].Name(),
 			Help: markdowns[i].Name(),
-			Func: func(c *ishell.Context) {
-				filepath := path.Join(demoesPath, markdowns[i].Name())
-				reader, err := os.Open(filepath)
-				if err != nil {
-					log.Println("os.Open failed,err:", err)
+			Func: func(markdown string) func(c *ishell.Context) {
+				return func(c *ishell.Context) {
+					filepath := path.Join(demoesPath, markdown)
+					reader, err := os.Open(filepath)
+					if err != nil {
+						log.Println("os.Open failed,err:", err)
+						return
+					}
+					if _, err := io.Copy(os.Stdout, reader); err != nil {
+						log.Println("io.Copy failed,err:", err)
+						return
+					}
 					return
 				}
-				if _, err := io.Copy(os.Stdout, reader); err != nil {
-					log.Println("io.Copy failed,err:", err)
-					return
-				}
-				return
-			},
+			}(markdowns[i].Name()),
 		})
 	}
 	shell.AddCmd(demosCmd)
