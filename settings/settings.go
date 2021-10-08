@@ -70,6 +70,16 @@ func newAppConfig() *Config {
 			"Help": "vim swp 文件泄漏利用工具",
 			"Run":  "vim-swp-exp/run.sh",
 		},
+		{
+			"Name": "SecList",
+			"Help": "各种字典、webshell合集",
+			"Run":  "SecList/run.sh",
+		},
+		{
+			"Name": "Glass",
+			"Help": "一款针对资产列表的快速指纹识别工具,旨在帮助红队人员在资产信息收集期间能够快速从C段、大量杂乱的资产中精准识别到易被攻击的系统",
+			"Run":  "Glass/run.sh",
+		},
 	}
 
 	return &Config{
