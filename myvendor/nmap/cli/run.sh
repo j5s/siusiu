@@ -16,4 +16,4 @@ if [ ! -d $install_path ]; then
     echo "[*] download..."
     download $install_path
 fi
-$install_path/nmap $*
+sudo $install_path/nmap $*
