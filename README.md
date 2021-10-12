@@ -14,13 +14,20 @@ siusiu提供了一个shell控制台，通过该控制台，可以：
 siusiu > help
 
 Commands:
+  GitHack                    .git泄漏利用脚本
+  Glass                      针对资产列表的快速指纹识别工具
+  SecList                    各种字典、webshell合集
+  XMLmining                  从xlsx、pptx、docx 文件的metadata中挖掘有用信息的工具
   backup-dict                生成网站备份字典
   baidu                      baidu url采集
   c-segment-scan             c段弱点发现
   clear                      clear the screen
   cms-fingerprint            cms指纹识别
+  demos                      获取工具的使用样例
   dir-collector              采集某个项目的所有目录名
   dirsearch                  目录扫描器
+  ds_store_exp               macOS .DS_Store文件泄漏利用脚本
+  dvcs-ripper                SVN 泄漏利用脚本
   exit                       exit the program
   help                       display help
   influx                     influx 配置疏忽漏洞利用
@@ -34,7 +41,8 @@ Commands:
   proxy-collector            代理采集
   shodan                     通过shodan被动扫描目标主机
   sqlmap                     自动化sql注入工具
-  url-collector              搜索引擎URL采集器
+  url-collector              搜索引擎URL采集器(goole,bing)
+  vim-swp-exp                vim swp 文件泄漏利用工具
   whois                      whois查询
   zenmap                     nmap-gui 版本,一个端口扫描器
 ```
