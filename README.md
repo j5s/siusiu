@@ -69,3 +69,38 @@ siusiu
 - MacOS
 - CentOS7
 - Ubuntu
+
+## Develop
+如果您有其他好的安全工具也想集成到siusiu中，可以按照如下步骤操作：
+step1 在siusiu安装目录（$HOME/src/siusiu）下的创建对应的工具目录（建议以工具名命名），并在该目录下创建该工具的自动下载和自动运行脚本 run.sh
+run.sh demo:
+
+```shell
+#!/bin/bash
+base_path=$HOME/src
+dirsearch_path=$base_path/dirsearch
+
+function download {
+    git clone https://github.com.cnpmjs.org/maurosoria/dirsearch.git $1
+    cd $1
+    pip3 install -r requirements.txt
+}
+
+#1.检查程序目录是否存在
+if [ ! -d $dirsearch_path ]; then
+    #2.如果不存在就下载
+    echo "[*] download dirsearch..."
+    download $dirsearch_path
+fi
+#运行dirsearch
+python3 $dirsearch_path/dirsearch.py $*
+```
+step2. 在config.json 配置文件中添加对应工具，例如：
+```
+        {
+            "Name": "dirsearch",
+            "Help": "目录扫描器",
+            "Run": "dirsearch/run.sh"
+        },
+```
+其中name为工具名，help为工具描述，run为该工具的run.sh在myvendor目录下的相对路径
