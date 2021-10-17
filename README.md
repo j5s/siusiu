@@ -10,6 +10,8 @@ siusiu提供了一个shell控制台，通过该控制台，可以：
 - 运行第三方安全工具
 - 查看第三方安全工具的说明文档与使用样例（通过demos命令）
 
+同时siusiu也支持非交互模式，便于siusiu被其他程序调用,例如:siusiu exec help
+
 ## Usage：
 
 ```

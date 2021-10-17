@@ -31,5 +31,11 @@ func main() {
 		log.Println("routers.Init failed,err:", err)
 		return
 	}
-	shell.Run()
+	// 当第一个参数为exec时，非交互模式
+	if len(os.Args) > 1 && os.Args[1] == "exec" {
+		shell.Process(os.Args[2:]...)
+	} else {
+		//交互模式
+		shell.Run()
+	}
 }
