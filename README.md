@@ -19,6 +19,7 @@ Commands:
   Glass                      针对资产列表的快速指纹识别工具
   SecList                    各种字典、webshell合集
   XMLmining                  从xlsx、pptx、docx 文件的metadata中挖掘有用信息的工具
+  arp-spoofing               基于go语言实现的ARP欺骗工具，支持局域网内主机扫描，ARP投毒、中间人攻击、敏感信息嗅探，HTTP报文嗅探
   backup-dict                生成网站备份字典
   baidu                      baidu url采集
   c-segment-scan             c段弱点发现
@@ -33,6 +34,7 @@ Commands:
   help                       display help
   influx                     influx 配置疏忽漏洞利用
   nmap                       端口扫描器
+  one-for-all                一款功能强大的子域名收集工具
   passwd-based-domain        基于域名生成若口令字典,常用于爆破网站后台密码
   passwd-based-userinfo      基于用户资料生成弱口令字典
   passwd-guess               弱口令爆破器,支持:ssh,ftp,mysql,redis,mssql,postgresql,mongodb
