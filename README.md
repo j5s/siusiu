@@ -74,8 +74,7 @@ siusiu
 ## Develop  
 
 如果您有其他好的安全工具也想集成到siusiu中，可以按照如下步骤操作：  
-step1 在siusiu安装目录（$HOME/src/siusiu）下的创建对应的工具目录（建议以工具名命名），并在该目录下创建该工具的自动下载和自动运行脚本 run.sh
-run.sh demo:
+step1.在siusiu安装目录（$HOME/src/siusiu）下创建对应的工具目录（建议以工具名命名,例如：dirsearch），并在该目录下创建该工具的shell脚本 run.sh，例如：
 
 ```shell
 #!/bin/bash
