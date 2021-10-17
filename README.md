@@ -8,6 +8,7 @@ siusiu提供了一个shell控制台，通过该控制台，可以：
 - 查看第三方安全工具列表
 - 自动安装第三方安全工具
 - 运行第三方安全工具
+- 查看第三方安全工具的说明文档与使用样例（通过demos命令）
 
 ## Usage：
 ```
@@ -105,3 +106,44 @@ step2. 在config.json 配置文件中添加对应工具，例如：
         },
 ```
 其中name为工具名，help为工具描述，run为该工具的run.sh在myvendor目录下的相对路径
+
+## 为工具编写demo文档
+
+不知道你是否也曾有过这样的烦恼：每天疲于学习各种工具的使用方法,当真正需要使用某个工具的时候，却一时半会儿想不起某个工具怎么用，这时你翻开了你的笔记本，找呀找，终于找到了以前的笔记。  
+关于这个问题，siusiu提供一种解决方案：将工具的使用文档或者常用demo集成在shell控制台中，需要时直接通过命令：demos+工具名 查看即可。  
+你可以将你常用的一些命令demo，以markdown文档的方式写在 $HOME/src/siusiu/myvendor/demos 目录下，siusiu控制台会自动读取该目录。  
+例如为sqlmap编写常用demo文档：
+
+```markdown
+# sqlmap demoes
+
+```shell
+# -m 批量扫描 —batch 全部采用默认行为，不向用户请求y/n,并且使用随机的user—agnet
+sqlmap -m temp2.txt --batch --random-agent> result.txt
+
+# 尝试获取所有数据库名
+sqlmap -u url --dbs —-random-agent --batch
+
+# 获取表名
+sqlmap -u url --tables —-random-agent --batch
+
+# 尝试获取所有用户:
+sqlmap -u url --users --random-agent --batch
+
+# 尝试获取账号密码:
+sqlmap -u url --password --random-agent --batch
+
+# 尝试获取当前用户:
+sqlmap -u url --current-user --random-agent --batch
+
+# 测试当前用户权限:
+sqlmap -u url --is-dba --random-agent --batch
+
+# 尝试写入木马,getshell
+sqlmap -u url --os-shell --random-agent --batch
+
+# 执行指定的sql语句
+sqlmap.py -u url -v 1 --sql-query 'select top 20 * from City'
+```
+
+在siusiu控制台中通过 demos sqlmap.md 即可查看该文档。  
