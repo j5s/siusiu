@@ -1,5 +1,5 @@
 # siusiu （suitesuite）
-一个用来管理suite 的suite
+一个用来管理suite 的suite，志在将渗透测试工程师从各种安全工具的学习和使用中解脱出来，减少渗透测试工程师花在安装工具、记忆工具使用方法上的时间和精力。
 
 ## Features
 
