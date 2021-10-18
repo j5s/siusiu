@@ -31,7 +31,7 @@ function download_go {
             go_pkg="go1.15.5.linux-amd64.tar.gz"
             download_url="https://studygolang.com/dl/golang/$go_pkg"
             echo "检测当前目录是否有go语言安装包"
-            if [ `ls | grep $go_pkg | wc -l` -ne 1  ]; then
+            if [ ! -f $HOME/$go_pkg  ]; then
                 echo "没有go语言安装包，开始下载"
                 wget $download_url && rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg
             else
