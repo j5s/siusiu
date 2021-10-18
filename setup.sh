@@ -31,12 +31,12 @@ function download_go {
             go_pkg="go1.15.5.linux-amd64.tar.gz"
             download_url="https://studygolang.com/dl/golang/$go_pkg"
             echo "检测当前目录是否有go语言安装包"
-            if [ ! -f $go_pkg ]; then
+            if [ `ls | grep $go_pkg | wc -l` -ne 1  ]; then
                 echo "没有go语言安装包，开始下载"
                 wget $download_url && rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg
             else
                 echo "有go语言安装包，开始解压"
-                rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg 
+                rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg
             fi
         elif [ $os -eq 'mac' ]; then
             go_pkg="go1.15.5.darwin-amd64.pkg"
@@ -58,12 +58,23 @@ function download_go {
         echo "已安装go"
     fi
 }
+# 初始化go配置
+function go_init {
+    echo "正在初始化go配置..."
+    #1.打开go mod 进行依赖管理
+    go env -w GO111MODULE=on
+    #2.设置第三方库的镜像代理
+    go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+    #3. 下载goimports 工具
+    go get -v golang.org/x/tools/cmd/goimports
+    echo "go配置初始化完成"
+}
 
 function setup {
     git config --global http.sslverify false
     rm -rf $1/$app_name && git clone https://gitee.com/nothing-is-nothing/siusiu.git $1/$app_name
     cd $1/$app_name
-    download_go && go build -o $app_name
+    download_go && go_init && go build -o $app_name
     for shell_config_file in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc"; do
         if [ -f $shell_config_file ]; then
             sed -i "/$app_name/d" $shell_config_file                           #删除含有app_name的所有行
