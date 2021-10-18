@@ -30,7 +30,11 @@ function download_go {
         if [ $os = 'centos' -o $os = 'ubuntu' -o $os = 'linux' ]; then
             go_pkg="go1.15.5.linux-amd64.tar.gz"
             download_url="https://studygolang.com/dl/golang/$go_pkg"
-            wget $download_url && rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg && rm $go_pkg
+            if [ ! -f $go_pkg ]; then
+                wget $download_url && rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg
+            else
+                rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg 
+            fi
         elif [ $os -eq 'mac' ]; then
             go_pkg="go1.15.5.darwin-amd64.pkg"
             download_url="https://studygolang.com/dl/golang/$go_pkg"
@@ -66,8 +70,6 @@ function setup {
     done
     echo "[*] setup success!"
 }
-
-
 
 if [ ! -d $setup_path ]; then
     mkdir $setup_path
