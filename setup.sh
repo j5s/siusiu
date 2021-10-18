@@ -44,7 +44,7 @@ function download_go {
             wget $download_url && open $go_pkg
         fi
 
-        for shell_config_file in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc"; do
+        for shell_config_file in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc" "/etc/profile"; do
             if [ -f $shell_config_file ]; then
                 sed -i '/\/usr\/local\/go/d' $shell_config_file
                 echo 'export PATH=$PATH:/usr/local/go/bin' >>$shell_config_file #向shell配置文件中添加别名
@@ -75,7 +75,7 @@ function setup {
     rm -rf $1/$app_name && git clone https://gitee.com/nothing-is-nothing/siusiu.git $1/$app_name
     cd $1/$app_name
     download_go && go_init && go build -o $app_name
-    for shell_config_file in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc"; do
+    for shell_config_file in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc" "/etc/profile"; do
         if [ -f $shell_config_file ]; then
             sed -i "/$app_name/d" $shell_config_file                           #删除含有app_name的所有行
             echo "alias $app_name=$1/$app_name/$app_name" >>$shell_config_file #向shell配置文件中添加别名
