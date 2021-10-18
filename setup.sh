@@ -30,9 +30,12 @@ function download_go {
         if [ $os = 'centos' -o $os = 'ubuntu' -o $os = 'linux' ]; then
             go_pkg="go1.15.5.linux-amd64.tar.gz"
             download_url="https://studygolang.com/dl/golang/$go_pkg"
+            echo "检测当前目录是否有go语言安装包"
             if [ ! -f $go_pkg ]; then
+                echo "没有go语言安装包，开始下载"
                 wget $download_url && rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg
             else
+                echo "有go语言安装包，开始解压"
                 rm -rf /usr/local/go && tar -C /usr/local -xzf $go_pkg 
             fi
         elif [ $os -eq 'mac' ]; then
