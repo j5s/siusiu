@@ -13,5 +13,5 @@ if [ ! -d $install_path ]; then
     download $install_path
     echo "[*] download success"
 fi
-cd $install_path && git pull origin master 
+cd $install_path && git reset --hard && git pull origin master 
 $install_path/url-collector $*
