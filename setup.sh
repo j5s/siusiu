@@ -75,7 +75,7 @@ function setup {
     download_go && go_init 
     git config --global http.sslverify false
     cd $1/$app_name
-    if [ -d $1/app_name ];then 
+    if [ -d $1/$app_name ];then 
         echo "已安装 siusiu,正在检查更新..."
         git reset --hard && git pull origin master && go build ./... && go build 
     else
