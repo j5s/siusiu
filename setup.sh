@@ -32,23 +32,36 @@ function download_go {
             go_pkg="go1.15.5.linux-amd64.tar.gz"
             download_url="https://studygolang.com/dl/golang/$go_pkg"
             echo "检测当前目录是否有go语言安装包"
-            if [ ! -f $HOME/$go_pkg  ]; then
+            if [ ! -f $HOME/$go_pkg ]; then
                 echo "没有go语言安装包，开始下载"
                 wget -P $HOME $download_url && rm -rf /usr/local/go && tar -C /usr/local -xzf $HOME/$go_pkg
             else
                 echo "有go语言安装包，开始解压"
                 rm -rf /usr/local/go && tar -C /usr/local -xzf $HOME/$go_pkg
             fi
-        elif [ $os -eq 'mac' ]; then
+        elif [ $os = 'mac' ]; then
+            echo "检测到操作系统为mac,开始检测家目录下是否有安装包"
             go_pkg="go1.15.5.darwin-amd64.pkg"
-            download_url="https://studygolang.com/dl/golang/$go_pkg"
-            wget $download_url && open $go_pkg
+            if [ ! -f $HOME/$go_pkg ]; then
+                echo "家目录下没有安装包,开始下载"
+                download_url="https://studygolang.com/dl/golang/$go_pkg"
+                wget -P $HOME $download_url
+            fi
+            open $go_pkg
+            while true; do
+                if [ $(ps aux | grep "Installer.app" | grep -v grep | wc -l) -eq 0 ]; then
+                    break
+                else
+                    sleep 1
+                fi
+            done
+            echo "go语言安装包安装成功"
         fi
 
         for shell_config_file in $shell_config_file_list; do
             if [ -f $shell_config_file ]; then
                 sed -i '/\/usr\/local\/go/d' $shell_config_file
-                echo 'export PATH=$PATH:/usr/local/go/bin' >> $shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功"
+                echo 'export PATH=$PATH:/usr/local/go/bin' >>$shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功"
             fi
         done
         if [ $(go version | grep "1.15.5" | wc -l) -eq 1 ]; then
@@ -72,20 +85,20 @@ function go_init {
 
 function setup {
     #检查并安装go语言环境
-    download_go && go_init 
+    download_go && go_init
     git config --global http.sslverify false
     cd $1/$app_name
-    if [ -d $1/$app_name ];then 
+    if [ -d $1/$app_name ]; then
         echo "已安装 siusiu,正在检查更新..."
-        git reset --hard && git pull origin master && go build ./... && go build 
+        git reset --hard && git pull origin master && go build ./... && go build
     else
         echo "未安装 siusiu,正在下载中..."
         git clone https://gitee.com/nothing-is-nothing/siusiu.git $1/$app_name && go build ./... && go build -o $app_name
-    fi 
+    fi
 
     for shell_config_file in $shell_config_file_list; do
         if [ -f $shell_config_file ]; then
-            sed -i "/$app_name/d" $shell_config_file && echo "alias $app_name=$1/$app_name/$app_name" >> $shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功" 
+            sed -i "/$app_name/d" $shell_config_file && echo "alias $app_name=$1/$app_name/$app_name" >>$shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功"
         fi
     done
     echo "[*] setup success!"
