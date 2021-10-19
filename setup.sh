@@ -48,9 +48,7 @@ function download_go {
         for shell_config_file in $shell_config_file_list; do
             if [ -f $shell_config_file ]; then
                 sed -i '/\/usr\/local\/go/d' $shell_config_file
-                echo 'export PATH=$PATH:/usr/local/go/bin' >> $shell_config_file #向shell配置文件中添加别名
-                source $shell_config_file
-                echo "重新加载 $shell_config_file 成功"
+                echo 'export PATH=$PATH:/usr/local/go/bin' >> $shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功"
             fi
         done
         if [ $(go version | grep "1.15.5" | wc -l) -eq 1 ]; then
@@ -73,15 +71,21 @@ function go_init {
 }
 
 function setup {
+    #检查并安装go语言环境
+    download_go && go_init 
     git config --global http.sslverify false
-    rm -rf $1/$app_name && git clone https://gitee.com/nothing-is-nothing/siusiu.git $1/$app_name
     cd $1/$app_name
-    download_go && go_init && go build -o $app_name
+    if [ -d $1/app_name ];then 
+        echo "已安装 siusiu,正在检查更新..."
+        git reset --hard && git pull origin master && go build ./... && go build 
+    else
+        echo "未安装 siusiu,正在下载中..."
+        git clone https://gitee.com/nothing-is-nothing/siusiu.git $1/$app_name && go build ./... && go build -o $app_name
+    fi 
+
     for shell_config_file in $shell_config_file_list; do
         if [ -f $shell_config_file ]; then
-            sed -i "/$app_name/d" $shell_config_file                           #删除含有app_name的所有行
-            echo "alias $app_name=$1/$app_name/$app_name" >>$shell_config_file 
-            source $shell_config_file
+            sed -i "/$app_name/d" $shell_config_file && echo "alias $app_name=$1/$app_name/$app_name" >> $shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功" 
         fi
     done
     echo "[*] setup success!"
