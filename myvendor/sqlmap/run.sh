@@ -13,4 +13,4 @@ if [ ! -d $install_path ]; then
     download $install_path
     echo "[*] download success!"
 fi
-python3 $install_path/sqlmap.py $*
+cd $install_path && python3 $install_path/sqlmap.py $*
