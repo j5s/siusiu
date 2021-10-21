@@ -72,12 +72,26 @@
         },
         {
             "Name": "arp-spoofing",
-            "Help": "基于go语言实现的ARP欺骗工具，支持局域网内主机扫描，ARP投毒、中间人攻击、敏感信息嗅探，HTTP报文嗅探",
+            "Help": "局域网内主机扫描，ARP投毒、中间人攻击、敏感信息嗅探，HTTP报文嗅探",
             "Run": "arp-spoofing/run.sh"
         },{
             "Name":"one-for-all",
             "Help":"一款功能强大的子域名收集工具",
             "Run":"one-for-all/run.sh"
+        },{
+            "Name":"TPscan",
+            "Help":"一键ThinkPHP漏洞检测",
+            "Run":"TPscan/run.sh"
+        },{
+            "Name":"Vulcan",
+            "Help":"资产扫描工具(红队)",
+            "Run":"Vulcan/run.sh"
+        },
+        {
+            "Name":"wafw00f",
+            "Help":"waf指纹识别",
+            "Run":"wafw00f/run.sh"
         }
+
     ]
 }

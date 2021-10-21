@@ -15,5 +15,5 @@ if [ ! -d $install_path ]; then
     download $install_path
     echo "[*] download success"
 fi
-
+cd $install_path && git reset --hard && git pull origin dev && go build ./... && go build
 sudo $install_path/ARPSpoofing $*

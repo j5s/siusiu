@@ -21,8 +21,10 @@ Commands:
   GitHack                    .git泄漏利用脚本
   Glass                      针对资产列表的快速指纹识别工具
   SecList                    各种字典、webshell合集
+  TPscan                     一键ThinkPHP漏洞检测
+  Vulcan                     资产扫描工具(红队)
   XMLmining                  从xlsx、pptx、docx 文件的metadata中挖掘有用信息的工具
-  arp-spoofing               基于go语言实现的ARP欺骗工具，支持局域网内主机扫描，ARP投毒、中间人攻击、敏感信息嗅探，HTTP报文嗅探
+  arp-spoofing               局域网内主机扫描，ARP投毒、中间人攻击、敏感信息嗅探，HTTP报文嗅探
   backup-dict                生成网站备份字典
   baidu                      baidu url采集
   c-segment-scan             c段弱点发现
@@ -49,6 +51,7 @@ Commands:
   sqlmap                     自动化sql注入工具
   url-collector              搜索引擎URL采集器(goole,bing)
   vim-swp-exp                vim swp 文件泄漏利用工具
+  wafw00f                    waf指纹识别
   whois                      whois查询
   zenmap                     nmap-gui 版本,一个端口扫描器
 ```
