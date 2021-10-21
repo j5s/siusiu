@@ -13,5 +13,5 @@ if [ ! -d $install_path ]; then
     download $install_path
     echo "[*] download success!"
 fi
-cd $install_path && sudo python $install_path/GitHack.py $*
+cd $install_path && sudo python $install_path/GitHack.py $* && echo "文件下载到了:$install_path"
 
