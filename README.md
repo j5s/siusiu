@@ -47,6 +47,7 @@ Commands:
   pocsuite3-console          poc框架(控制台模式)
   port-scan                  主动扫描端口
   proxy-collector            代理采集
+  shiro-attack               shiro反序列化漏洞综合利用工具(GUI)
   shodan                     通过shodan被动扫描目标主机
   sqlmap                     自动化sql注入工具
   url-collector              搜索引擎URL采集器(goole,bing)
@@ -54,6 +55,9 @@ Commands:
   wafw00f                    waf指纹识别
   whois                      whois查询
   zenmap                     nmap-gui 版本,一个端口扫描器
+
+
+siusiu >  
 ```
 
 ## Installation:

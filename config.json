@@ -91,6 +91,11 @@
             "Name":"wafw00f",
             "Help":"waf指纹识别",
             "Run":"wafw00f/run.sh"
+        },
+        {
+            "Name":"shiro-attack",
+            "Help":"shiro反序列化漏洞综合利用工具(GUI)",
+            "Run":"shiro-attack/run.sh"
         }
 
     ]
