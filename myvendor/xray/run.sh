@@ -46,7 +46,7 @@ case $(get_os) in
     ;;
 esac
 #1.检查程序目录是否存在
-if [ ! -d $install_path ]; then
+if [ ! -d $install_path  ] || [ ! -f  $install_path/$name ]; then
     #如果不存在就下载
     echo "[*] download..."
     download $install_path
