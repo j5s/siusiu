@@ -56,8 +56,6 @@ Commands:
   whois                      whois查询
   zenmap                     nmap-gui 版本,一个端口扫描器
 
-
-siusiu >  
 ```
 
 ## Installation:

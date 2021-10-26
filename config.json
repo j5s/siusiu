@@ -96,7 +96,11 @@
             "Name":"shiro-attack",
             "Help":"shiro反序列化漏洞综合利用工具(GUI)",
             "Run":"shiro-attack/run.sh"
+        },
+        {
+            "Name":"xray",
+            "Help":"漏洞扫描器",
+            "Run":"xray/run.sh"
         }
-
     ]
 }
