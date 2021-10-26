@@ -3,9 +3,11 @@ base_path=$HOME/src
 install_path=$base_path/xray #程序安装目录
 
 function download {
-    wget -P $1 "https://download.xray.cool/xray/1.7.1/$name.zip"
+    if [ ! -f $1/$name.zip ]; then
+        wget -P $1 "https://download.xray.cool/xray/1.7.1/$name.zip"
+    fi
     cd $1
-    unzip $zip
+    unzip "$name.zip"
 }
 
 function get_os {
@@ -50,5 +52,5 @@ if [ ! -d $install_path ]; then
     download $install_path
     echo "[*] download success!"
 fi
-cd $install_path && echo "当前目录:`pwd`"
+cd $install_path && echo "当前目录:$(pwd)"
 $install_path/$name $*
