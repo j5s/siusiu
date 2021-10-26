@@ -52,8 +52,10 @@ Commands:
   sqlmap                     自动化sql注入工具
   url-collector              搜索引擎URL采集器(goole,bing)
   vim-swp-exp                vim swp 文件泄漏利用工具
+  vulhub                     漏洞靶场镜像库
   wafw00f                    waf指纹识别
   whois                      whois查询
+  xray                       漏洞扫描器
   zenmap                     nmap-gui 版本,一个端口扫描器
 
 ```
@@ -157,3 +159,15 @@ sqlmap.py -u url -v 1 --sql-query 'select top 20 * from City'
 ```
 
 在siusiu控制台中通过 demos sqlmap.md 即可查看该文档。  
+
+## QA
+
+问：我喜欢作者怎么办？  
+答：⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄  
+
+问：能不能一键日卫星？  
+答：~~不能，至少目前现阶段不可以。抱歉。么么哒。~~可以一键日卫星，我的小可爱。  
+
+问：How to build and install siusiu on raspberry pi ?  
+答：首先，请不要说英文，请用普通话。然后， I can not replay your question you just mentioned in mandarin excuse me. If you want to run it on embed platforms like raspberry pi 3 model b, you must need to know that these platforms have a ARM core, for example, pi 3b's cpu is Contex-A53 with a ARM v8 architecture, so, set GOOS=linux and GOARCH=aarch64 then run go build main.go in your shell, enjoyed it !
+

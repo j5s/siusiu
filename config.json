@@ -101,6 +101,12 @@
             "Name":"xray",
             "Help":"漏洞扫描器",
             "Run":"xray/run.sh"
+        },
+        {
+            "Name":"vulhub",
+            "Help":"漏洞靶场镜像库",
+            "Run":"vulhub/run.sh"
         }
+
     ]
 }

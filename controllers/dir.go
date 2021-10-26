@@ -15,7 +15,6 @@ import (
 
 //DirCollectController 目录收集
 func DirCollectController(c *ishell.Context) {
-
 	path, err := validate.ReadDirPath(c)
 	if err != nil {
 		log.Println("validate.ReadDirPath failed,err:", err)
