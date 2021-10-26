@@ -106,7 +106,11 @@
             "Name":"vulhub",
             "Help":"漏洞靶场镜像库",
             "Run":"vulhub/run.sh"
+        },
+        {
+            "Name":"update",
+            "Help":"更新siusiu版本",
+            "Run":"update.sh"
         }
-
     ]
 }
