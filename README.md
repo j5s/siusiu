@@ -166,7 +166,7 @@ sqlmap.py -u url -v 1 --sql-query 'select top 20 * from City'
 答：⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄  
 
 问：能不能一键日卫星？  
-答：~~不能，至少目前现阶段不可以。抱歉。么么哒。~~可以一键日卫星，我的小可爱。  
+答：~~不能，至少目前现阶段不可以。抱歉。么么哒~~ 可以一键日卫星，我的小可爱。  
 
 问：How to build and install siusiu on raspberry pi ?  
 答：首先，请不要说英文，请用普通话。然后， I can not replay your question you just mentioned in mandarin excuse me. If you want to run it on embed platforms like raspberry pi 3 model b, you must need to know that these platforms have a ARM core, for example, pi 3b's cpu is Contex-A53 with a ARM v8 architecture, so, set GOOS=linux and GOARCH=aarch64 then run go build main.go in your shell, enjoyed it !
