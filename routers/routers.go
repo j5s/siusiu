@@ -128,47 +128,5 @@ func Init(shell *ishell.Shell) error {
 		Help: "采集某个项目的所有目录名",
 		Func: controllers.DirCollectController,
 	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "proxy-collector",
-		Help: "代理采集",
-		Func: func(c *ishell.Context) {
-			exec.Python3("collect-proxy.py", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "backup-dict",
-		Help: "生成网站备份字典",
-		Func: func(c *ishell.Context) {
-			exec.Python3("backup-dict.py", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "passwd-based-domain",
-		Help: "基于域名生成若口令字典,常用于爆破网站后台密码",
-		Func: func(c *ishell.Context) {
-			exec.Python3("passwd-based-domain.py", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "passwd-based-userinfo",
-		Help: "基于用户资料生成弱口令字典",
-		Func: func(c *ishell.Context) {
-			exec.Python3("passwd-based-userinfo.py", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "cms-fingerprint",
-		Help: "cms指纹识别",
-		Func: func(c *ishell.Context) {
-			exec.Python3("cms-fingerprint/main.py", c.Args)
-		},
-	})
-	shell.AddCmd(&ishell.Cmd{
-		Name: "c-segment-scan",
-		Help: "c段弱点发现",
-		Func: func(c *ishell.Context) {
-			exec.Python3("c-segment-scan/run.sh", c.Args)
-		},
-	})
 	return nil
 }
