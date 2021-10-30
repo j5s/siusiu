@@ -108,14 +108,6 @@ func Init(shell *ishell.Shell) error {
 		Func: controllers.InfluxAttackController,
 	})
 	shell.AddCmd(influxCmd)
-	//baidu url 采集
-	shell.AddCmd(&ishell.Cmd{
-		Name: "baidu",
-		Help: "baidu url采集",
-		Func: func(c *ishell.Context) {
-			exec.Python3("baidu.py", c.Args)
-		},
-	})
 	//whois
 	shell.AddCmd(&ishell.Cmd{
 		Name: "whois",
