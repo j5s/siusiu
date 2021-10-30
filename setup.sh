@@ -87,18 +87,17 @@ function setup {
     #检查并安装go语言环境
     download_go && go_init
     git config --global http.sslverify false
-    cd $1/$app_name
     if [ -d $1/$app_name ]; then
         echo "已安装 siusiu,正在检查更新..."
-        git reset --hard && git pull origin master && go build ./... && go build
+        cd $1/$app_name && git reset --hard && git pull origin master && go build ./... && go build
     else
         echo "未安装 siusiu,正在下载中..."
-        git clone https://gitee.com/nothing-is-nothing/siusiu.git $1/$app_name && go build ./... && go build -o $app_name
+        git clone https://github.com.cnpmjs.org/ShangRui-hash/siusiu.git $1/$app_name && cd $1/$app_name && go build ./... && go build -o $app_name
     fi
 
     for shell_config_file in $shell_config_file_list; do
         if [ -f $shell_config_file ]; then
-            sed -i "/$app_name/d" $shell_config_file && echo "alias $app_name=$1/$app_name/$app_name" >>$shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功"
+            sed -i "/$app_name/d" $shell_config_file && echo "alias $app_name=$1/$app_name/$app_name" >> $shell_config_file && source $shell_config_file && echo "重新加载 $shell_config_file 成功"
         fi
     done
     echo "[*] setup success!"
