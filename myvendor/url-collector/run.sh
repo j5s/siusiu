@@ -13,5 +13,6 @@ if [ ! -d $install_path ]; then
     download $install_path
     echo "[*] download success"
 fi
-cd $install_path && git reset --hard && git pull origin master && go build ./... && go build
+current=$(pwd)
+cd $install_path && git reset --hard && git pull origin master && go build ./... && go build && cd $current
 $install_path/url-collector $*
