@@ -111,6 +111,11 @@
             "Name":"update",
             "Help":"更新siusiu版本",
             "Run":"update.sh"
+        },
+        {
+            "Name":"crawlergo",
+            "Help":"使用chrome headless模式进行URL收集的浏览器爬虫",
+            "Run":"crawlergo/run.sh"
         }
     ]
 }
