@@ -1,7 +1,7 @@
 #!/bin/bash
 . $HOME/src/siusiu/myvendor/lib/common.lib
 install_path=$base_path/observer-ward
-download_url="http://github.com.cnpmjs.org/0x727/ObserverWard_0x727/releases/download/default"
+download_url="https://github.com.cnpmjs.org/0x727/ObserverWard_0x727/releases/download/default"
 
 case $(get_os) in
 "linux_amd64")
