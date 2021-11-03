@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"gopkg.in/fatih/color.v1"
 )
 
 //Config 配置
@@ -34,4 +36,13 @@ func Init(filePath string) error {
 	home := os.Getenv("HOME")
 	AppConfig.MyVendorPath = fmt.Sprintf("%s/src/siusiu/myvendor", home)
 	return nil
+}
+
+func GetShellPrompt() string {
+	pwd, err := os.Getwd()
+	if err != nil {
+		logrus.Error("os.Getwd failed,err:", err)
+		return fmt.Sprintf("%s > ", AppConfig.ShellPrompt)
+	}
+	return fmt.Sprintf("%s:%s > ", color.YellowString(AppConfig.ShellPrompt), color.GreenString(pwd))
 }

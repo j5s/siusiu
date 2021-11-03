@@ -5,9 +5,11 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"siusiu/settings"
 	"strings"
 
 	"github.com/abiosoft/ishell"
+	"github.com/sirupsen/logrus"
 )
 
 //NotFoundHandler 未找到命令时处理函数
@@ -30,10 +32,12 @@ func NotFoundHandler(c *ishell.Context) {
 			log.Println("os.Chdir failed,err:", err)
 			return
 		}
+		c.SetPrompt(settings.GetShellPrompt())
 		return
 	}
 	var cmd *exec.Cmd
-	input := strings.Join(c.Args, " ")
+	input := strings.Join(c.RawArgs, " ")
+
 	if runtime.GOOS == "windows" {
 		cmd = exec.Command("cmd", "/C", input) //windows
 	} else {
@@ -43,7 +47,7 @@ func NotFoundHandler(c *ishell.Context) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
-		c.Println("cmd.Run failed,err:", err)
+		logrus.Error("cmd.Run failed,err:", err)
 		return
 	}
 }

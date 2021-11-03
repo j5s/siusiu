@@ -1,5 +1,5 @@
 {
-    "shell_prompt": "siusiu > ",
+    "shell_prompt": "siusiu",
     "tools": [{
             "Name": "sqlmap",
             "Help": "自动化sql注入工具",
@@ -91,6 +91,11 @@
             "Name":"wafw00f",
             "Help":"waf指纹识别",
             "Run":"wafw00f/run.sh"
+        },
+        {
+            "Name":"observer-ward",
+            "Help":"web指纹识别",
+            "Run":"observer-ward/run.sh"
         },
         {
             "Name":"shiro-attack",

@@ -106,5 +106,8 @@ function setup {
 if [ ! -d $setup_path ]; then
     mkdir $setup_path
 fi
+if [ ! -d $HOME/bin ];then 
+    mkdir $HOME/bin
+fi
 
 setup $setup_path

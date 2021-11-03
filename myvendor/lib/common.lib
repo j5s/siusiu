@@ -1,0 +1,22 @@
+#!/bin/echo
+
+base_path=$HOME/src
+
+function get_os {
+    case $(uname -s) in
+    "Darwin")
+        echo "mac"
+        ;;
+    "Linux")
+        hardware_platform=$(uname -i)
+        if [ hardware_platform='x86_64' ]; then
+            echo "linux_amd64"
+        elif [ hardware_platform="i386" ]; then
+            echo "linux_386"
+        fi
+        ;;
+    *)
+        echo "unkown"
+        ;;
+    esac
+}

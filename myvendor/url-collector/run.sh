@@ -15,4 +15,13 @@ if [ ! -d $install_path ]; then
 fi
 current=$(pwd)
 cd $install_path && git reset --hard && git pull origin master && go build ./... && go build && cd $current
+
+if [ ! -x $install_path/url-collector ];then
+    chmod +x $install_path/url-collector
+fi
+
+if [ ! -f $HOME/bin/url-collector ];then
+    cp $install_path/url-collector $HOME/bin/ 
+fi
+
 $install_path/url-collector $*

@@ -1,5 +1,5 @@
 #!/bin/bash
-base_path=$HOME/src
+. ../lib/common.lib
 install_path=$base_path/xray #程序安装目录
 
 function download {
@@ -10,25 +10,6 @@ function download {
     unzip "$name.zip"
 }
 
-function get_os {
-    case $(uname -s) in
-    "Darwin")
-        echo "mac"
-        ;;
-    "Linux")
-        hardware_platform=$(uname -i)
-        if [ hardware_platform='x86_64' ]; then
-            echo "linux_amd64"
-        elif [ hardware_platform="i386" ]; then
-            echo "linux_386"
-        fi
-        ;;
-    *)
-        echo "unkown"
-        ;;
-    esac
-
-}
 
 case $(get_os) in
 "mac")

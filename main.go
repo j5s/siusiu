@@ -24,7 +24,7 @@ func main() {
 	}
 	//2.初始化shell
 	shell := ishell.NewWithConfig(&readline.Config{
-		Prompt: settings.AppConfig.ShellPrompt,
+		Prompt: settings.GetShellPrompt(),
 	})
 	//3.初始化路由
 	if err := routers.Init(shell); err != nil {
