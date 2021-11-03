@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
+	"os/signal"
 	"runtime"
 	"siusiu/settings"
 	"strings"
@@ -37,7 +40,7 @@ func NotFoundHandler(c *ishell.Context) {
 	}
 	var cmd *exec.Cmd
 	input := strings.Join(c.RawArgs, " ")
-
+	fmt.Println("intput:", input)
 	if runtime.GOOS == "windows" {
 		cmd = exec.Command("cmd", "/C", input) //windows
 	} else {
@@ -46,6 +49,23 @@ func NotFoundHandler(c *ishell.Context) {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, os.Interrupt, os.Kill)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	go func(ctx context.Context) {
+	LOOP:
+		for {
+			select {
+			case <-ctx.Done():
+				break LOOP
+			case <-ch:
+				cmd.Process.Release()
+				cmd.Process.Kill()
+				break LOOP
+			}
+		}
+	}(ctx)
 	if err := cmd.Run(); err != nil {
 		logrus.Error("cmd.Run failed,err:", err)
 		return

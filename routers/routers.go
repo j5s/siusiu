@@ -9,6 +9,7 @@ import (
 	"siusiu/controllers"
 	"siusiu/pkg/exec"
 	"siusiu/settings"
+	"strings"
 
 	"github.com/abiosoft/ishell"
 )
@@ -22,6 +23,13 @@ func Init(shell *ishell.Shell) error {
 			Help: tool["Help"],
 			Func: func(run string) func(c *ishell.Context) {
 				return func(c *ishell.Context) {
+					list := []string{"|", ">", ">>", "<"}
+					for i := range list {
+						if strings.Contains(strings.Join(c.Args, " "), list[i]) {
+							controllers.NotFoundHandler(c)
+							return
+						}
+					}
 					exec.Bash(run, c.Args)
 				}
 			}(tool["Run"]),
