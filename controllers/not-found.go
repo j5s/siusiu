@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -40,7 +39,6 @@ func NotFoundHandler(c *ishell.Context) {
 	}
 	var cmd *exec.Cmd
 	input := strings.Join(c.RawArgs, " ")
-	fmt.Println("intput:", input)
 	if runtime.GOOS == "windows" {
 		cmd = exec.Command("cmd", "/C", input) //windows
 	} else {
