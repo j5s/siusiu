@@ -2,27 +2,31 @@ package exec
 
 import (
 	"context"
-	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"os/signal"
 	"siusiu/settings"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 //Bash bash 执行 shell脚本
 func Bash(scriptName string, args []string) {
-	cmdExec("/bin/bash", scriptName, args)
+	execPath := settings.GetToolExecPath(scriptName)
+	params := strings.Join(args, " ")
+	CmdExec("/bin/bash", execPath, params)
 }
 
 //Python3 执行python3脚本
 func Python3(scriptName string, args []string) {
-	cmdExec("python3", "py/"+scriptName, args)
+	execPath := settings.GetToolExecPath("py/" + scriptName)
+	params := strings.Join(args, " ")
+	CmdExec("python3", execPath, params)
 }
 
-func cmdExec(command, scriptName string, args []string) {
-	cmd := exec.Command(command, fmt.Sprintf("%s/%s", settings.AppConfig.MyVendorPath, scriptName), strings.Join(args, " "))
+func CmdExec(name string, args ...string) {
+	cmd := exec.Command(name, args...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -44,7 +48,7 @@ func cmdExec(command, scriptName string, args []string) {
 		}
 	}(ctx)
 	if err := cmd.Run(); err != nil {
-		log.Println("cmd.Run failed,err:", err)
+		logrus.Error("cmd.Run failed,err:", err)
 		return
 	}
 }

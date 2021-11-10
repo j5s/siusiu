@@ -1,12 +1,8 @@
 package controllers
 
 import (
-	"context"
-	"log"
 	"os"
-	"os/exec"
-	"os/signal"
-	"runtime"
+	"siusiu/pkg/exec"
 	"siusiu/settings"
 	"strings"
 
@@ -16,56 +12,41 @@ import (
 
 //NotFoundHandler 未找到命令时处理函数
 func NotFoundHandler(c *ishell.Context) {
-	if c.Args[0] == "cd" {
+	args := replaceVar(c.RawArgs)
+	input := strings.Join(args, " ")
+	if args[0] == "cd" {
 		var dir string
-		switch len(c.Args) {
-		case 2:
-			if strings.HasPrefix(c.Args[1], "$") {
-				dir = os.Getenv(c.Args[1][1:])
-			} else {
-				dir = c.Args[1]
-			}
+		switch len(args) {
 		case 1:
 			dir = os.Getenv("HOME")
 		default:
 			return
 		}
 		if err := os.Chdir(dir); err != nil {
-			log.Println("os.Chdir failed,err:", err)
+			logrus.Error("os.Chdir failed,err:", err)
 			return
 		}
 		c.SetPrompt(settings.GetShellPrompt())
 		return
 	}
-	var cmd *exec.Cmd
-	input := strings.Join(c.RawArgs, " ")
-	if runtime.GOOS == "windows" {
-		cmd = exec.Command("cmd", "/C", input) //windows
-	} else {
-		cmd = exec.Command("/bin/bash", "-c", input)
-	}
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, os.Interrupt, os.Kill)
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-	go func(ctx context.Context) {
-	LOOP:
-		for {
-			select {
-			case <-ctx.Done():
-				break LOOP
-			case <-ch:
-				cmd.Process.Release()
-				cmd.Process.Kill()
-				break LOOP
+	exec.CmdExec("/bin/bash", "-c", input)
+}
+
+//replaceVar 替换命令中的变量
+func replaceVar(rawArgs []string) []string {
+	args := make([]string, 0, len(rawArgs))
+	for _, arg := range rawArgs {
+		//1.替换所有环境变量
+		if strings.Contains(arg, "$") {
+			arg = os.ExpandEnv(arg)
+		}
+		//2.替换所有内置命令
+		for _, tool := range settings.AppConfig.Tools {
+			if arg == tool["Name"] {
+				arg = settings.GetToolExecPath(tool["Run"])
 			}
 		}
-	}(ctx)
-	if err := cmd.Run(); err != nil {
-		logrus.Error("cmd.Run failed,err:", err)
-		return
+		args = append(args, arg)
 	}
+	return args
 }

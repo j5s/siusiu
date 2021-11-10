@@ -38,6 +38,7 @@ func Init(filePath string) error {
 	return nil
 }
 
+//GetShellPrompt 获取shell提示符
 func GetShellPrompt() string {
 	pwd, err := os.Getwd()
 	if err != nil {
@@ -45,4 +46,10 @@ func GetShellPrompt() string {
 		return fmt.Sprintf("%s > ", AppConfig.ShellPrompt)
 	}
 	return fmt.Sprintf("%s:%s > ", color.YellowString(AppConfig.ShellPrompt), color.GreenString(pwd))
+}
+
+//GetToolExecPath 获取工具执行路径
+//@param scriptName 工具相对于myvendor的路径
+func GetToolExecPath(scriptName string) string {
+	return fmt.Sprintf("%s/%s", AppConfig.MyVendorPath, scriptName)
 }
