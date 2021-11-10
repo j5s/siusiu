@@ -92,7 +92,7 @@ function setup {
         cd $1/$app_name && git reset --hard && git pull origin master && go build ./... && go build
     else
         echo "未安装 siusiu,正在下载中..."
-        git clone https://github.com.cnpmjs.org/ShangRui-hash/siusiu.git $1/$app_name && cd $1/$app_name && go build ./... && go build -o $app_name
+        git clone --depth 1 https://github.com.cnpmjs.org/ShangRui-hash/siusiu.git $1/$app_name && cd $1/$app_name && go build ./... && go build -o $app_name
     fi
 
     for shell_config_file in $shell_config_file_list; do
